@@ -1,23 +1,18 @@
 version: '3.8'
 
-volumes:
-  postgres_data: 
-  static_value:
-  media_value:
-
 services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - db_value:/var/lib/postgresql/data/
     env_file:
       - ./.env
   web:
-    image: bondarval/yamdb_api:v1.0
+    image: shinkava/yamdb:v1.0
     restart: always
     volumes:
       - static_value:/app/static/
-      - media_value:/app/media/ 
+      - media_value:/app/media/
     depends_on:
       - db
     env_file:
@@ -25,12 +20,23 @@ services:
 
   nginx:
     image: nginx:1.21.3-alpine
+
     ports:
       - "80:80"
+
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
       - ../docs/redoc.html:/usr/share/nginx/html/api/docs/redoc.html
+
       - static_value:/var/html/static/
+
       - media_value:/var/html/media/
+
     depends_on:
       - web
+
+volumes:
+  db_value:
+  static_value:
+  media_value:

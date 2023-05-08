@@ -12,7 +12,6 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
 from reviews.models import Category, Genre, Review, Title, User
 
-from api_yamdb.settings import DEFAULT_FROM_EMAIL
 
 from .filters import FilterForTitle
 from .mixins import ModelSetCLD
@@ -37,7 +36,6 @@ def sent_confirmation_code(request):
     return send_mail(
         'Код подтверждения',
         f'Ваш код подтверждения: {confirmation_code}',
-        [DEFAULT_FROM_EMAIL],
         [email],
         fail_silently=False,
     )
