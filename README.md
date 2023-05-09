@@ -13,6 +13,8 @@
 
 > Для реализации использовался Django REST Framework
 
+## Ссылка на сайт:
+http://158.160.5.214
 
 ## Наполнение env-файла:
 DB_ENGINE=django.db.backends.postgresql # указываем, что работаем с postgresql
